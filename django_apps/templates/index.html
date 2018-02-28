@@ -1,0 +1,33 @@
+{# Called by django_config/urls.py #}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load render_bundle from webpack_loader %}
+
+{% block head_title %}
+	Home
+{% endblock head_title %}
+
+{% block body_class %}
+	col-sm-6 col-sm-offset-4
+{% endblock body_class %}
+
+{% block body %}
+	<div id="react-root"></div>
+	<form action="" method="POST">{% csrf_token %}
+		<input type="submit"  value="Scrape!">
+	</form>
+	{% for obj in object_list %}
+		<div class="row">
+			<div class="col-sm-12">
+				<span>
+					<img src="{{ obj.image }}">
+					{{ obj.name }}
+					{{ obj.symbol }}
+					${{ obj.price }}
+				</span>
+			</div>
+		</div>
+	{% endfor %}
+	{% render_bundle 'vendors' %}
+	{% render_bundle 'Index' %}
+{% endblock body %}
