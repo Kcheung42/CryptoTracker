@@ -9,6 +9,8 @@ Features of the Crawler:
 ## This is an example project using the following technologies:
 * Docker with Docker Compose
 * nginx, gunicorn
+* React (under construction)
+* Django Restful Api (under construction)
 
 ## Prerequesites
 Must have docker installed:
@@ -45,12 +47,13 @@ https://www.docker.com/community-edition#/download
 2. make docker-build-dev
 3. make docker-up-dev
 
-
 #### Visit http://localhost:8000
 
-1. Click Scrape Button!
+* To access admin: User:admin, Password:admin. (may neeed to restart server for the first time)
+* Click Scrape Button!
 ![alt text](screenshots/screenshot.png "description")
 
 ### ToDo:
-Convert to Restful API
-Transfer frontend to React
+1. Convert to Restful API
+2. Transfer frontend to React
+3. Production Environment still has issues
