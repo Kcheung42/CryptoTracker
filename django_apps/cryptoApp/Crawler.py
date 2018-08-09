@@ -6,7 +6,7 @@
 #    By: kcheung <kcheung@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 16:54:54 by kcheung           #+#    #+#              #
-#    Updated: 2018/02/28 12:23:59 by kcheung          ###   ########.fr        #
+#    Updated: 2018/08/09 11:37:57 by filemaker        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,13 +75,13 @@ class Crawler:
 		return(tool_script)
 
 	def get_banner(self, page):
-		container = page.findAll("div", {"class" : "row bottom-margin-1x"})
+		container = page.findAll("div", {"class" : "details-panel-item--header flex-container"})
 		container = container[0]
 		ret = {}
 		n = container.findAll("h1")[0].text.strip(' ')
 		img = container.findAll("img")[0]["src"]
 		pr = container.findAll("span", {"id" : "quote_price"})[0]["data-usd"]
-		symb = container.findAll("small", {"class" : "bold hidden-xs"})[0].text.strip('()')
+		symb = container.findAll("span", {"class" : "text-bold h3 text-gray text-large"})[0].text.strip('()')
 		ret["name"] = n
 		ret["symbol"] = symb
 		ret["image"] = img
@@ -146,6 +146,7 @@ class Crawler:
 		startTime = datetime.now()
 		q = self.initialScrape()
 		for i in range(10):
+			# Spawn 10 worksers
 			t = threading.Thread(name='worker:'+ str(i), target=self.worker,args=(q,))
 			t.start()
 		q.join()
